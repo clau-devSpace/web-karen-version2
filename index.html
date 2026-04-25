@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karen Arias - Flautista Profesional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Satisfy&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #121e59;
+            --blue-dark: #0D1640;
+            --blue-light: #2A3A7A;
+            --blue-pale: #E8EEF8;
+            --coral: #E8725A;
+            --coral-light: #F09080;
+            --gold: #D4A44A;
+            --bg-deep: #121e59;
+            --bg-section: #F9FAFB;
+            --bg-card: #FFFFFF;
+            --bg-warm: #F9FAFB;
+            --bg-warm-alt: #EDF1F9;
+            --bg-light-gray: #F9FAFB;
+            --text-light: #FFFFFF;
+            --text-muted-light: #90A4B8;
+            --text-muted: #7A8A9A;
+            --text-dark: #121e59;
+            --text-dark-muted: #5A6A7A;
+            --border-subtle: rgba(0,0,0,0.07);
+            --border-dark: rgba(0,0,0,0.08);
+            --gradient-hero: linear-gradient(135deg, #121e59 0%, #1a2a6a 40%, #121e59 100%);
+            --gradient-blue: linear-gradient(135deg, #121e59, #2A3A7A);
+            --gradient-warm: linear-gradient(180deg, #F6F8FC 0%, #EDF1F9 100%);
+            --gradient-sunset: linear-gradient(135deg, #2B4C8C, #4A6DB5);
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --font-script: 'Satisfy', cursive;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--text-dark); overflow-x: hidden; background: var(--bg-deep); }
+
+        /* HEADER */
+        header { position: fixed; top: 0; width: 100%; padding: 0 60px; z-index: 1000; transition: background 0.4s, box-shadow 0.4s; background: transparent; }
+        header.scrolled { background: rgba(28, 42, 58, 0.95); backdrop-filter: blur(14px); box-shadow: 0 2px 30px rgba(0,0,0,0.3); }
+        nav { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .nav-logo { font-family: var(--font-script); font-size: 24px; color: var(--text-light); text-decoration: none; }
+        .nav-logo span { color: var(--coral); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-light); font-family: var(--font-display); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; transition: color 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gradient-blue); transition: width 0.3s; border-radius: 2px; }
+        .nav-links a:hover { color: var(--text-light); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta { padding: 8px 24px !important; border: 2px solid var(--blue) !important; border-radius: 25px !important; color: var(--text-light) !important; transition: all 0.3s !important; }
+        .nav-cta:hover { background: var(--gradient-blue) !important; border-color: transparent !important; color: var(--text-light) !important; }
+        .nav-cta::after { display: none !important; }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
+        .menu-toggle span { width: 25px; height: 2px; background: var(--text-light); transition: 0.3s; border-radius: 2px; }
+
+        /* HERO */
+        .hero { position: relative; min-height: 100vh; background: var(--bg-deep); display: flex; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; background: url('imagenes/fondo-grande-2.png') center/cover no-repeat; z-index: 0; }
+        .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,30,89,0.98) 0%, rgba(18,30,89,0.85) 30%, rgba(18,30,89,0.35) 55%, rgba(18,30,89,0) 100%); }
+        .hero-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,30,89,0.7) 0%, rgba(18,30,89,0.2) 25%, transparent 50%); z-index: 1; }
+        .hero-container { width: 100%; height: 100vh; display: flex; align-items: center; position: relative; z-index: 2; }
+        .hero-left { width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding-left: 0px; align-items: center; text-align: center; }
+        .hero-tag { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 30px; animation: fadeUp 0.8s ease 0.2s both; }
+        .hero-tag-line { width: 35px; height: 2px; background: var(--coral); border-radius: 2px; }
+        .hero-tag-text { font-family: var(--font-display); font-size: 12px; color: var(--coral); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; }
+        .hero-name { animation: fadeUp 0.8s ease 0.4s both; position: relative; z-index: 10; display: flex; align-items: baseline; gap: 18px; margin-bottom: 35px; white-space: nowrap; margin-left: 20px; }
+        .hero-name .first { font-family: 'Montserrat', sans-serif; font-size: 95px; font-weight: 500; color: var(--text-light); letter-spacing: 5px; text-transform: uppercase; line-height: 1; }
+        .hero-name .last { font-family: 'Montserrat', sans-serif; font-size: 95px; font-weight: 500; color: var(--text-light); line-height: 0.9; text-transform: uppercase; letter-spacing: 5px; }
+        .hero-signature { position: absolute; bottom: 60px; left: 60px; font-family: var(--font-script); font-size: 160px; color: rgba(255,255,255,0.03); z-index: 1; pointer-events: none; white-space: nowrap; animation: fadeIn 1.5s ease 1.2s both; }
+        .hero-subtitle { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.8; max-width: 350px; font-weight: 300; animation: fadeUp 0.8s ease 0.6s both; margin-bottom: 35px; }
+        .hero-cta { animation: fadeUp 0.8s ease 0.8s both; }
+        .hero-cta a { display: inline-flex; align-items: center; gap: 8px; color: var(--coral); text-decoration: none; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: gap 0.3s, color 0.3s; }
+        .hero-cta a:hover { gap: 14px; color: var(--coral-light); }
+        .hero-cta a svg { width: 18px; height: 18px; fill: currentColor; transition: transform 0.3s; }
+        .hero-cta a:hover svg { transform: translateX(3px); }
+        
+        .hero-scroll-indicator { position: absolute; bottom: 40px; left: 100px; display: flex; align-items: center; gap: 12px; z-index: 3; animation: fadeUp 0.8s ease 1.2s both; }
+        .scroll-line { width: 2px; height: 45px; background: linear-gradient(180deg, var(--blue-light), transparent); border-radius: 2px; animation: scrollPulse 2s ease infinite; }
+        .scroll-text { font-family: var(--font-display); font-size: 10px; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; writing-mode: vertical-rl; font-weight: 600; }
+
+        /* SECTION LABEL */
+        .section-label { display: flex; align-items: center; gap: 15px; margin-bottom: 18px; justify-content: center; }
+        .section-label-line { width: 28px; height: 2px; background: var(--coral); border-radius: 2px; }
+        .section-label-text { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--coral); }
+
+        /* SPOTIFY */
+        .latest-section { background: var(--bg-section); padding: 140px 60px; position: relative; overflow: hidden; }
+        .latest-section::before { content: ''; position: absolute; top: -10%; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; background: radial-gradient(circle, rgba(18,30,89,0.04) 0%, transparent 65%); pointer-events: none; }
+        .latest-content { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        .latest-header { text-align: center; margin-bottom: 70px; }
+        .latest-header h3 { font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+        .latest-header p { font-size: 15px; color: var(--text-dark-muted); font-weight: 300; }
+        .spotify-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .spotify-card { background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-subtle); transition: transform 0.4s, box-shadow 0.4s; box-shadow: 0 2px 15px rgba(0,0,0,0.06); }
+        .spotify-card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(0,0,0,0.12); }
+        .spotify-card-image { width: 100%; height: 250px; position: relative; overflow: hidden; }
+        .spotify-card:nth-child(1) .spotify-card-image { background: url('imagenes/flauta-1.jpeg') center/cover; }
+        .spotify-card:nth-child(2) .spotify-card-image { background: url('imagenes/flauta-2.jpeg') center/cover; }
+        .spotify-card:nth-child(3) .spotify-card-image { background: url('imagenes/Flauta-3.jpeg') center/cover; }
+        .spotify-card-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, transparent 55%); }
+        .spotify-play-btn { position: absolute; bottom: 18px; right: 18px; width: 48px; height: 48px; background: #1DB954; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; opacity: 0; transform: translateY(8px); transition: opacity 0.3s, transform 0.3s; box-shadow: 0 4px 18px rgba(29,185,84,0.45); }
+        .spotify-card:hover .spotify-play-btn { opacity: 1; transform: translateY(0); }
+        .spotify-play-btn svg { width: 20px; height: 20px; fill: white; margin-left: 2px; }
+        .spotify-card-info { padding: 22px; }
+        .spotify-card-type { font-family: var(--font-display); font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #1DB954; font-weight: 700; margin-bottom: 8px; }
+        .spotify-card-title { font-family: var(--font-display); font-size: 20px; color: var(--text-dark); font-weight: 600; margin-bottom: 5px; }
+        .spotify-card-artist { font-size: 13px; color: var(--text-dark-muted); font-weight: 300; }
+        .spotify-cta { text-align: center; margin-top: 55px; }
+        .btn-spotify { display: inline-flex; align-items: center; gap: 10px; padding: 14px 36px; background: #1DB954; color: white; text-decoration: none; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 30px; transition: transform 0.3s, box-shadow 0.3s; }
+        .btn-spotify:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(29,185,84,0.4); }
+        .btn-spotify svg { width: 18px; height: 18px; fill: white; }
+
+        /* SOCIAL MEDIA */
+        .social-section { background: var(--bg-deep); padding: 140px 80px; position: relative; }
+        .social-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 15% 50%, rgba(18,30,89,0.03) 0%, transparent 50%), radial-gradient(ellipse at 85% 50%, rgba(18,30,89,0.03) 0%, transparent 50%); pointer-events: none; }
+        .social-content { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+        .social-header { text-align: center; margin-bottom: 55px; }
+        .social-header h3 { font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--text-light); margin-bottom: 12px; }
+        .social-header p { font-size: 15px; color: var(--text-muted); font-weight: 300; }
+        .social-tabs { display: flex; justify-content: center; background: white; border-radius: 30px; padding: 5px; max-width: 480px; margin: 0 auto 50px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .social-tab { flex: 1; padding: 13px 24px; font-family: var(--font-display); font-size: 13px; color: var(--text-dark-muted); text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 9px; border-radius: 25px; font-weight: 700; }
+        .social-tab.active { color: var(--text-light); background: var(--gradient-blue); box-shadow: 0 4px 15px rgba(18,30,89,0.3); }
+        .social-tab:hover:not(.active) { color: var(--text-dark); }
+        .social-tab svg { width: 18px; height: 18px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeUp 0.5s ease; }
+        .instagram-grid, .youtube-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-bottom: 50px; }
+        .instagram-card, .youtube-card { background: white; border-radius: 16px; overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; border: 1px solid var(--border-subtle); box-shadow: 0 2px 15px rgba(0,0,0,0.06); }
+        .instagram-card:hover, .youtube-card:hover { transform: translateY(-5px); box-shadow: 0 14px 45px rgba(0,0,0,0.1); }
+        .card-image { width: 100%; height: 290px; background-size: cover; background-position: center; position: relative; }
+        .instagram-card:nth-child(1) .card-image { background: url('imagenes/flauta-1.jpeg') center/cover; }
+        .instagram-card:nth-child(2) .card-image { background: url('imagenes/flauta-2.jpeg') center/cover; }
+        .instagram-card:nth-child(3) .card-image { background: url('imagenes/Flauta-3.jpeg') center/cover; }
+        .card-play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 54px; height: 54px; background: rgba(255,255,255,0.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .instagram-card:hover .card-play-icon { opacity: 1; }
+        .card-play-icon::after { content: '\25B6'; color: var(--blue); font-size: 16px; margin-left: 3px; }
+        .card-content { padding: 20px; }
+        .card-header { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+        .card-instagram-icon { width: 18px; height: 18px; color: var(--text-dark); }
+        .card-username { font-family: var(--font-display); font-size: 13px; color: var(--text-dark); font-weight: 600; }
+        .card-live-dot { width: 7px; height: 7px; background: var(--blue); border-radius: 50%; margin-left: auto; }
+        .card-description { font-size: 14px; color: var(--text-dark-muted); line-height: 1.5; margin-bottom: 14px; font-weight: 300; }
+        .card-stats { display: flex; gap: 16px; }
+        .card-stat { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--text-dark-muted); }
+        .youtube-thumb { width: 100%; height: 210px; position: relative; display: flex; align-items: center; justify-content: center; }
+        .youtube-card:nth-child(1) .youtube-thumb { background: url('imagenes/flauta-1.jpeg') center/cover; }
+        .youtube-card:nth-child(2) .youtube-thumb { background: url('imagenes/flauta-2.jpeg') center/cover; }
+        .youtube-card:nth-child(3) .youtube-thumb { background: url('imagenes/Flauta-3.jpeg') center/cover; }
+        .youtube-thumb::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.22); transition: background 0.3s; }
+        .youtube-card:hover .youtube-thumb::after { background: rgba(0,0,0,0.12); }
+        .yt-play-btn { position: absolute; z-index: 2; width: 58px; height: 40px; background: rgba(255,0,0,0.85); border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: background 0.3s, transform 0.3s; }
+        .youtube-card:hover .yt-play-btn { background: #FF0000; transform: scale(1.08); }
+        .yt-play-btn::after { content: ''; border-style: solid; border-width: 8px 0 8px 14px; border-color: transparent transparent transparent white; margin-left: 2px; }
+        .youtube-duration { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; font-size: 11px; padding: 2px 6px; border-radius: 4px; z-index: 2; font-weight: 600; }
+        .youtube-info { padding: 18px 20px; }
+        .youtube-title { font-family: var(--font-display); font-size: 17px; color: var(--text-dark); margin-bottom: 8px; font-weight: 600; line-height: 1.3; }
+        .youtube-meta { font-size: 12px; color: var(--text-dark-muted); display: flex; gap: 12px; font-weight: 300; }
+        .social-follow { text-align: center; margin-top: 50px; }
+        .follow-button { display: inline-flex; align-items: center; gap: 10px; padding: 13px 34px; border: 2px solid var(--blue); color: var(--blue); text-decoration: none; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 30px; transition: all 0.3s; }
+        .follow-button:hover { background: var(--gradient-blue); color: var(--text-light); border-color: transparent; }
+
+        /* ABOUT */
+        .about { background: var(--gradient-warm); padding: 140px 60px; }
+        .about-content { max-width: 1200px; margin: 0 auto; }
+        .about-header { text-align: center; margin-bottom: 60px; }
+        .about h3 { font-family: var(--font-display); font-size: 48px; font-weight: 700; margin-bottom: 18px; color: var(--text-dark); }
+        .about-divider { width: 50px; height: 3px; background: var(--coral); margin: 28px auto; border-radius: 3px; }
+        .about-body { display: flex; gap: 60px; align-items: flex-start; }
+        .about-image { width: 380px; flex-shrink: 0; border-radius: 16px; overflow: hidden; position: sticky; top: 100px; }
+        .about-image-placeholder { width: 100%; aspect-ratio: 3/4; background: linear-gradient(135deg, #d0d5e0, #b8c0d0); display: flex; align-items: center; justify-content: center; }
+        .about-image-placeholder svg { width: 50px; height: 50px; opacity: 0.25; fill: white; }
+        .about-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .about-text { flex: 1; }
+        .about-text p { font-size: 15px; line-height: 1.9; color: var(--text-dark-muted); margin-bottom: 16px; font-weight: 300; text-align: left; }
+        .about-signature { margin-top: 45px; font-family: var(--font-script); font-size: 48px; background: linear-gradient(135deg, var(--blue), var(--coral)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-align: left; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 35px; margin-top: 70px; padding-top: 55px; border-top: 1px solid var(--border-dark); }
+        .stat-item { text-align: center; }
+        .stat-number { font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+        .stat-label { font-family: var(--font-display); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dark-muted); font-weight: 600; }
+        .about .cta-button { display: inline-block; margin-top: 40px; padding: 14px 36px; background: var(--gradient-blue); color: var(--text-light); text-decoration: none; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; transition: transform 0.3s, box-shadow 0.3s; border-radius: 30px; }
+        .about .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(18,30,89,0.3); }
+
+        /* GALLERY */
+        .gallery-section { background: var(--bg-section); padding: 140px 60px; position: relative; overflow: hidden; }
+        .gallery-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(circle, rgba(18,30,89,0.03) 0%, transparent 65%); pointer-events: none; }
+        .gallery-content { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        .gallery-header { text-align: center; margin-bottom: 65px; }
+        .gallery-header h3 { font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+        .gallery-header p { font-size: 15px; color: var(--text-dark-muted); font-weight: 300; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto auto; gap: 16px; }
+        .gallery-item { border-radius: 14px; overflow: hidden; position: relative; cursor: pointer; transition: transform 0.4s; }
+        .gallery-item:hover { transform: scale(1.02); }
+        .gallery-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; }
+        .gallery-item:hover::after { opacity: 1; }
+        .gallery-item-caption { position: absolute; bottom: 16px; left: 16px; right: 16px; color: white; z-index: 2; opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; }
+        .gallery-item:hover .gallery-item-caption { opacity: 1; transform: translateY(0); }
+        .gallery-item-caption h4 { font-family: var(--font-display); font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+        .gallery-item-caption p { font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 300; }
+        .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; height: 420px; }
+        .gallery-item:nth-child(2), .gallery-item:nth-child(3) { height: 200px; }
+        .gallery-item:nth-child(4), .gallery-item:nth-child(5) { height: 200px; }
+        .gallery-item:nth-child(6) { grid-column: span 2; height: 200px; }
+        .gallery-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .gp-1 { background: linear-gradient(135deg, #2a1f3d, #3d2952); }
+        .gp-2 { background: linear-gradient(135deg, #1e2a3d, #2a3d52); }
+        .gp-3 { background: linear-gradient(135deg, #3d1e2a, #522a3d); }
+        .gp-4 { background: linear-gradient(135deg, #2a3d1e, #3d522a); }
+        .gp-5 { background: linear-gradient(135deg, #3d2a1e, #52403d); }
+        .gp-6 { background: linear-gradient(135deg, #1e3d3d, #2a5252); }
+        .gallery-placeholder-icon { width: 40px; height: 40px; opacity: 0.2; fill: white; }
+
+        /* CONTACT */
+        .contact-section { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 100px 20px; background: url('imagenes/fondo-formulario.jpg') center/cover fixed; }
+        .contact-section::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(18,30,89,0.8) 0%, rgba(18,30,89,0.15) 100%); backdrop-filter: blur(3px); }
+        .contact-container { position: relative; z-index: 1; max-width: 500px; width: 100%; }
+        .contact-form-card { background: rgba(18,30,89,0.7); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 45px 40px; box-shadow: 0 25px 70px rgba(0,0,0,0.45); backdrop-filter: blur(18px); }
+        .contact-form-card h3 { font-family: var(--font-display); font-size: 34px; font-weight: 700; color: var(--text-light); text-align: center; margin-bottom: 10px; }
+        .contact-form-card > p { font-size: 14px; color: var(--text-muted); text-align: center; margin-bottom: 32px; line-height: 1.6; font-weight: 300; }
+        .form-group { margin-bottom: 16px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+        .form-group label { display: block; font-family: var(--font-display); font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; font-weight: 600; }
+        .form-group input, .form-group textarea { width: 100%; padding: 13px 16px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: var(--text-light); font-size: 14px; font-family: var(--font-body); transition: all 0.3s; }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.22); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--blue-light); background: rgba(255,255,255,0.1); box-shadow: 0 0 0 3px rgba(18,30,89,0.12); }
+        .form-group textarea { resize: vertical; min-height: 105px; }
+        .submit-button { width: 100%; padding: 15px; background: var(--gradient-blue); border: none; border-radius: 30px; color: var(--text-light); font-family: var(--font-display); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; font-weight: 700; margin-top: 8px; }
+        .submit-button:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(18,30,89,0.4); }
+
+        /* FOOTER */
+        footer { background: #121e59; padding: 80px 60px 40px; position: relative; }
+        footer::before { content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 55px; }
+        .footer-logo { font-family: var(--font-script); font-size: 28px; color: var(--text-light); margin-bottom: 16px; }
+        .footer-logo span { color: var(--coral); }
+        .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 300px; font-weight: 300; }
+        .footer-social-icons { display: flex; gap: 12px; margin-top: 22px; }
+        .footer-social-icon { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; transition: all 0.3s; text-decoration: none; }
+        .footer-social-icon:hover { border-color: var(--blue); background: rgba(18,30,89,0.12); transform: translateY(-2px); }
+        .footer-social-icon svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.6); transition: fill 0.3s; }
+        .footer-social-icon:hover svg { fill: var(--blue-light); }
+        .footer-column h4 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-light); margin-bottom: 20px; }
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 12px; }
+        .footer-column ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 13px; transition: color 0.3s; font-weight: 300; }
+        .footer-column ul li a:hover { color: var(--blue-light); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 300; }
+        .footer-bottom-links { display: flex; gap: 25px; }
+        .footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; font-weight: 300; }
+        .footer-bottom-links a:hover { color: var(--blue-light); }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-container { flex-direction: column; }
+            .hero-left { width: 100%; padding: 40px; justify-content: center; }
+            .hero-name .first { font-size: 52px; letter-spacing: 8px; }
+            .hero-name .last { font-size: 72px; }
+            .hero-signature { font-size: 100px; bottom: auto; top: 50%; left: 30px; }
+            
+            .hero-scroll-indicator { left: 40px; }
+            .instagram-grid, .youtube-grid, .spotify-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item:nth-child(1) { grid-column: span 2; height: 350px; }
+            .gallery-item:nth-child(6) { grid-column: span 2; }
+            .social-section { padding: 100px 40px; }
+            .footer-content { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+        @media (max-width: 768px) {
+            header { padding: 0 25px; }
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .hero-name .first { font-size: 36px; letter-spacing: 5px; }
+            .hero-name .last { font-size: 50px; letter-spacing: 4px; }
+            .hero-name { margin-left: 0; gap: 12px; }
+            .hero-signature { display: none; }
+            .hero-left { padding: 30px; }
+            
+            .hero-scroll-indicator { left: 30px; bottom: 25px; }
+            .latest-section, .gallery-section { padding: 100px 25px; }
+            .latest-header h3, .social-header h3, .gallery-header h3, .about h3 { font-size: 34px; }
+            .instagram-grid, .youtube-grid, .spotify-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item:nth-child(1) { grid-column: span 1; height: 280px; }
+            .gallery-item:nth-child(n) { height: 200px; }
+            .gallery-item:nth-child(6) { grid-column: span 1; }
+            .social-tabs { max-width: 100%; }
+            .social-tab { padding: 11px 14px; font-size: 11px; letter-spacing: 1px; }
+            .about { padding: 100px 30px; }
+            .about-body { flex-direction: column; gap: 40px; }
+            .about-image { width: 100%; position: static; }
+            .about-image-placeholder { aspect-ratio: 16/9; }
+            .stats { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+            .stat-number { font-size: 38px; }
+            .contact-section { padding: 80px 20px; }
+            .contact-form-card { padding: 30px 25px; border-radius: 16px; }
+            .form-row { grid-template-columns: 1fr; }
+            footer { padding: 60px 25px 30px; }
+            .footer-content { grid-template-columns: 1fr; gap: 30px; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <nav>
+            <a href="#inicio" class="nav-logo">Karen <span>Arias</span></a>
+            <div class="nav-links">
+                <a href="#lo-ultimo">Music</a>
+                <a href="#redes-sociales">Social</a>
+                <a href="#sobre-mi">About</a>
+                <a href="#galeria">Gallery</a>
+                <a href="#contacto" class="nav-cta">Contact</a>
+            </div>
+            <div class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-bg"></div>
+        <div class="hero-signature">Karen Arias</div>
+        <div class="hero-container">
+            <div class="hero-left">
+                <div class="hero-tag">
+                    <div class="hero-tag-line"></div>
+                    <span class="hero-tag-text">Professional Flutist</span>
+                </div>
+                <div class="hero-name">
+                    <span class="first">Karen</span>
+                    <span class="last">Arias</span>
+                </div>
+                <p class="hero-subtitle">Blending classical rigor with the soul of Caribbean rhythms.</p>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-line"></div>
+            <span class="scroll-text">Scroll</span>
+        </div>
+    </section>
+
+    <section class="latest-section" id="lo-ultimo">
+        <div class="latest-content">
+            <div class="latest-header">
+                <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">Lo Último</span><div class="section-label-line"></div></div>
+                <h3>Latest on Spotify</h3>
+                <p>My most recent recordings and collaborations</p>
+            </div>
+            <div class="spotify-grid">
+                <div class="spotify-card">
+                    <div class="spotify-card-image"><div class="spotify-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                    <div class="spotify-card-info"><div class="spotify-card-type">Single</div><div class="spotify-card-title">Melodía del Caribe</div><div class="spotify-card-artist">Karen Arias</div></div>
+                </div>
+                <div class="spotify-card">
+                    <div class="spotify-card-image"><div class="spotify-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                    <div class="spotify-card-info"><div class="spotify-card-type">Collaboration</div><div class="spotify-card-title">Nocturno en Fa</div><div class="spotify-card-artist">Karen Arias feat. Orquesta Sinfónica</div></div>
+                </div>
+                <div class="spotify-card">
+                    <div class="spotify-card-image"><div class="spotify-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+                    <div class="spotify-card-info"><div class="spotify-card-type">EP</div><div class="spotify-card-title">Raíces</div><div class="spotify-card-artist">Karen Arias</div></div>
+                </div>
+            </div>
+            <div class="spotify-cta">
+                <a href="https://open.spotify.com/" target="_blank" class="btn-spotify">
+                    <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                    Listen on Spotify
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-section" id="redes-sociales">
+        <div class="social-content">
+            <!--<div class="social-header">
+                <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">Community</span><div class="section-label-line"></div></div>
+                <h3>Social Media</h3>
+                <p>Follow me on social media to see my latest updates</p>
+            </div>-->
+            <div class="social-tabs">
+                <div class="social-tab active" data-tab="instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+                    Instagram
+                </div>
+                <div class="social-tab" data-tab="youtube">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    YouTube
+                </div>
+            </div>
+
+            <div class="tab-content active" id="tab-instagram">
+                <div class="instagram-grid">
+                    <div class="instagram-card">
+                        <div class="card-image"><div class="card-play-icon"></div></div>
+                        <div class="card-content">
+                            <div class="card-header"><svg class="card-instagram-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg><span class="card-username">karenariasflute</span><div class="card-live-dot"></div></div>
+                            <p class="card-description">Descripción del post aquí...</p>
+                            <div class="card-stats"><div class="card-stat"><span class="card-stat-icon">❤️</span><span>5.3k</span></div><div class="card-stat"><span class="card-stat-icon">💬</span><span>203</span></div></div>
+                        </div>
+                    </div>
+                    <div class="instagram-card">
+                        <div class="card-image"><div class="card-play-icon"></div></div>
+                        <div class="card-content">
+                            <div class="card-header"><svg class="card-instagram-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg><span class="card-username">karenariasflute</span><div class="card-live-dot"></div></div>
+                            <p class="card-description">Un fragmento de mi última presentación. 🎵 #flute #flutist</p>
+                            <div class="card-stats"><div class="card-stat"><span class="card-stat-icon">❤️</span><span>8.2k</span></div><div class="card-stat"><span class="card-stat-icon">💬</span><span>350</span></div></div>
+                        </div>
+                    </div>
+                    <div class="instagram-card">
+                        <div class="card-image"><div class="card-play-icon"></div></div>
+                        <div class="card-content">
+                            <div class="card-header"><svg class="card-instagram-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg><span class="card-username">karenariasflute</span><div class="card-live-dot"></div></div>
+                            <p class="card-description">Preparándome para el concierto de esta noche! 🎵</p>
+                            <div class="card-stats"><div class="card-stat"><span class="card-stat-icon">❤️</span><span>7.5k</span></div><div class="card-stat"><span class="card-stat-icon">💬</span><span>275</span></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-follow"><a href="https://instagram.com/karenariasflute" target="_blank" class="follow-button">Follow on Instagram</a></div>
+            </div>
+
+            <div class="tab-content" id="tab-youtube">
+                <div class="youtube-grid">
+                    <div class="youtube-card"><div class="youtube-thumb"><div class="yt-play-btn"></div><div class="youtube-duration">4:32</div></div><div class="youtube-info"><div class="youtube-title">Concierto en Buenos Aires — Flauta & Orquesta</div><div class="youtube-meta"><span>12K views</span><span>2 months ago</span></div></div></div>
+                    <div class="youtube-card"><div class="youtube-thumb"><div class="yt-play-btn"></div><div class="youtube-duration">6:15</div></div><div class="youtube-info"><div class="youtube-title">Bach Partita in A Minor — Live Performance</div><div class="youtube-meta"><span>8.4K views</span><span>4 months ago</span></div></div></div>
+                    <div class="youtube-card"><div class="youtube-thumb"><div class="yt-play-btn"></div><div class="youtube-duration">3:48</div></div><div class="youtube-info"><div class="youtube-title">Venezuelan Folk Medley — Flauta Traversa</div><div class="youtube-meta"><span>15K views</span><span>6 months ago</span></div></div></div>
+                </div>
+                <div class="social-follow"><a href="https://youtube.com/" target="_blank" class="follow-button">Subscribe on YouTube</a></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="sobre-mi">
+        <div class="about-content">
+            <div class="about-header">
+                <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">Biography</span><div class="section-label-line"></div></div>
+                <h3>About Me</h3>
+                <div class="about-divider"></div>
+            </div>
+            <div class="about-body">
+                <div class="about-image">
+                    <img src="imagenes/Flauta-1.jpeg">
+                    <!-- Reemplazá el div .about-image-placeholder con: <img src="imagenes/tu-foto.jpg" alt="Karen Arias"> -->
+                </div>
+                <div class="about-text">
+                    <p>Karen Arias is a Venezuelan flutist whose warm and expressive sound has become her artistic signature. Born in Carúpano, Venezuela — a coastal town with a deep Caribbean identity — she grew up surrounded by rhythms, colors, and a culture where music is a fundamental language.</p>
+                    <p>She began her flute studies at the age of seven, and by ten she was selected to continue her musical training in Caracas at the Simón Bolívar Conservatory and the National Flute Academy. Her artistic formation blends classical discipline with an emotional depth shaped by teachers such as Vicente Urbaez, Raimundo Pineda, Elvis Villarroel, and Miguel Pineda.</p>
+                    <p>Karen has been part of orchestras in both Venezuela and Argentina, including the Orquesta Juvenil Municipal de San Martín and the Sinfónica Juvenil Nacional Libertador San Martín. She has also participated in symphonic and theatrical productions such as Principito Sinfónico and Navidad en las Películas.</p>
+                    <p>Now based in Buenos Aires, she continues refining her craft while shaping a musical identity that fuses Venezuelan roots, classical rigor, and contemporary rhythms. Her vision is simple yet powerful: for her music to be an emotional refuge for those who listen.</p>
+                    <div class="about-signature">Karen Arias</div>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-item"><div class="stat-number">+8</div><div class="stat-label">Years Experience</div></div>
+                <div class="stat-item"><div class="stat-number">+20</div><div class="stat-label">Concerts per Year</div></div>
+                <div class="stat-item"><div class="stat-number">+20</div><div class="stat-label">Recordings</div></div>
+                <div class="stat-item"><div class="stat-number">+10</div><div class="stat-label">Contests</div></div>
+            </div>
+            <a href="#contacto" class="cta-button" style="display:block;text-align:center;margin-top:40px;">Get in Touch</a>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="galeria">
+        <div class="gallery-content">
+            <div class="gallery-header">
+                <div class="section-label"><div class="section-label-line"></div><span class="section-label-text">Moments</span><div class="section-label-line"></div></div>
+                <h3>Gallery</h3>
+                <p>Concerts, rehearsals and special moments</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item"><div class="gallery-placeholder gp-1"><svg class="gallery-placeholder-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div><div class="gallery-item-caption"><h4>Concierto en Buenos Aires</h4><p>Teatro Colón, 2025</p></div></div>
+                <div class="gallery-item"><div class="gallery-placeholder gp-2"><svg class="gallery-placeholder-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div><div class="gallery-item-caption"><h4>Ensayo con Orquesta</h4><p>Centro Cultural Kirchner</p></div></div>
+                <div class="gallery-item"><div class="gallery-placeholder gp-3"><svg class="gallery-placeholder-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div><div class="gallery-item-caption"><h4>Masterclass</h4><p>Conservatorio de Música</p></div></div>
+                <div class="gallery-item"><div class="gallery-placeholder gp-4"><svg class="gallery-placeholder-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div><div class="gallery-item-caption"><h4>Recital Solista</h4><p>Festival de Flautistas</p></div></div>
+                <div class="gallery-item"><div class="gallery-placeholder gp-5"><svg class="gallery-placeholder-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div><div class="gallery-item-caption"><h4>Backstage</h4><p>Antes del show</p></div></div>
+                <div class="gallery-item"><div class="gallery-placeholder gp-6"><svg class="gallery-placeholder-icon" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></div><div class="gallery-item-caption"><h4>Navidad en las Películas</h4><p>Producción Sinfónica</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+        <div class="contact-container">
+            <div class="contact-form-card">
+                <h3>Get in Touch</h3>
+                <p>Whether you have a question, a project in mind, or just want to say hello — feel free to reach out!</p>
+                <form>
+                    <div class="form-row"><div class="form-group"><label for="name">Full Name</label><input type="text" id="name" name="name" placeholder="John Doe" required></div><div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="john@example.com" required></div></div>
+                    <div class="form-row"><div class="form-group"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="+1 234 567 890"></div><div class="form-group"><label for="subject">Subject</label><input type="text" id="subject" name="subject" placeholder="What is this about?"></div></div>
+                    <div class="form-group"><label for="message">Your Message</label><textarea id="message" name="message" placeholder="Write your message here..." required></textarea></div>
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">Karen <span>Arias</span></div>
+                <p>Venezuelan flutist based in Buenos Aires. Blending classical rigor with the warmth of Caribbean rhythms.</p>
+                <div class="footer-social-icons">
+                    <a href="https://instagram.com/karenariasflute" target="_blank" class="footer-social-icon" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg></a>
+                    <a href="#" target="_blank" class="footer-social-icon" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                    <a href="#" target="_blank" class="footer-social-icon" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+                    <a href="#" target="_blank" class="footer-social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-column"><h4>Navigation</h4><ul><li><a href="#inicio">Home</a></li><li><a href="#lo-ultimo">Music</a></li><li><a href="#redes-sociales">Social Media</a></li><li><a href="#sobre-mi">About</a></li></ul></div>
+            <div class="footer-column"><h4>Connect</h4><ul><li><a href="#galeria">Gallery</a></li><li><a href="#contacto">Contact</a></li><li><a href="https://instagram.com/karenariasflute" target="_blank">Instagram</a></li><li><a href="#" target="_blank">YouTube</a></li></ul></div>
+            <div class="footer-column"><h4>Listen</h4><ul><li><a href="#" target="_blank">Spotify</a></li><li><a href="#" target="_blank">Apple Music</a></li><li><a href="#" target="_blank">Amazon Music</a></li><li><a href="#" target="_blank">SoundCloud</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Karen Arias. All rights reserved.</p>
+            <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+        </div>
+    </footer>
+
+    <script>
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+        document.querySelectorAll('.social-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.social-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('tab-' + tab.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.instagram-card, .youtube-card, .spotify-card, .gallery-item, .stat-item').forEach(el => {
+            el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; observer.observe(el);
+        });
+    </script>
+</body>
+</html>
